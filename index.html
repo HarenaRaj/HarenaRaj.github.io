@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Harena RAJAONA · Développeur Senior .NET | Portfolio jouable</title>
+    <meta
+      name="description"
+      content="Portfolio jouable de Harena RAJAONA, Développeur Senior .NET à Antananarivo : parcourez sa carrière (TeloIray, MANAO, HaiRun, Astek), ses compétences C#, ASP.NET Core, Vue.js, React, Docker, Kubernetes et ses projets GitHub dans un jeu de plateforme."
+    />
+    <meta name="author" content="Harena RAJAONA" />
+    <meta name="theme-color" content="#0c0809" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Harena Quest · Le parcours de Harena RAJAONA, Développeur Senior .NET" />
+    <meta property="og:description" content="Un portfolio qui se joue : débloque ses compétences, corrige des bugs et découvre son parcours de 2020 à aujourd'hui." />
+    <meta property="og:image" content="assets/img/og.jpg" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Harena RAJAONA",
+        "alternateName": "RAJAONA Harimisa Harenasoa",
+        "jobTitle": "Développeur Senior .NET",
+        "worksFor": { "@type": "Organization", "name": "Astek Madagascar" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Antananarivo", "addressCountry": "MG" },
+        "email": "mailto:harenasoarajaona@gmail.com",
+        "knowsAbout": ["C#", ".NET", "ASP.NET Core", "React Native", "TypeScript", "Vue.js", "React", "Angular", "Docker", "Kubernetes", "SQL", "Kafka"],
+        "sameAs": [
+          "https://linkedin.com/in/harena-rajaona-4210a4201",
+          "https://github.com/HarenaRaj",
+          "https://facebook.com/harimisaharenasoa.rajaona"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="game" aria-label="Jeu de plateforme retraçant le parcours de Harena RAJAONA"></canvas>
+      <div class="vignette" aria-hidden="true"></div>
+
+      <header id="hud" class="hud" hidden>
+        <div class="hud-player px">
+          <img src="assets/img/harena-pixel.png" class="pixel-avatar" alt="" width="36" height="36" />
+          <div class="hud-info">
+            <div class="hud-name">HARENA <span id="hud-level">LVL 1</span></div>
+            <div class="hud-class" id="hud-class">Aventurier</div>
+            <div class="xpbar"><span id="hud-xp"></span></div>
+          </div>
+        </div>
+        <nav id="timeline" class="timeline" aria-label="Chapitres du parcours"></nav>
+        <div class="hud-actions">
+          <button id="btn-inventory" class="hud-btn" title="Inventaire des compétences (I)">
+            <svg viewBox="0 0 16 16" aria-hidden="true" shape-rendering="crispEdges"><path fill="#e8b04b" d="M5 2h6v1h2v2h1v3h-1v2h-1v2h-2v1H9v1H7v-1H6v-1H4v-2H3V8H2V5h1V3h2z"/><path fill="#f7d27a" d="M5 4h2v1H6v2H5z"/></svg>
+            <span id="hud-skills">0</span>
+          </button>
+          <button id="btn-cv" class="hud-btn" title="Mode CV classique">CV</button>
+          <button id="btn-sound" class="hud-btn" title="Couper / activer le son" aria-label="Couper / activer le son"></button>
+          <button id="btn-help" class="hud-btn" title="Aide et voyage rapide (H)">?</button>
+        </div>
+      </header>
+
+      <div id="banner" class="banner" aria-live="polite"></div>
+      <div id="toasts" class="toasts" aria-live="polite"></div>
+
+      <div id="dialog" class="dialog px" role="dialog" aria-live="polite" hidden>
+        <div class="dialog-portrait"></div>
+        <div class="dialog-body">
+          <div class="dialog-name">Maki</div>
+          <p class="dialog-text"></p>
+          <span class="dialog-next" aria-hidden="true">▼</span>
+        </div>
+      </div>
+
+      <div id="modal" class="modal" role="dialog" aria-modal="true" hidden>
+        <div class="modal-card px">
+          <button class="modal-close" aria-label="Fermer">✕</button>
+          <div class="modal-content"></div>
+        </div>
+      </div>
+
+      <section id="title-screen" class="screen title-screen">
+        <div class="title-inner">
+          <div class="title-left">
+            <p class="kicker">▶ Portfolio interactif</p>
+            <h1 class="logo"><span>HARENA</span><span>QUEST</span></h1>
+            <p class="title-sub">
+              Le parcours de <strong>Harena RAJAONA</strong>, Développeur Senior .NET, à vivre comme un jeu vidéo.
+            </p>
+            <div class="title-menu">
+              <button class="btn btn-primary btn-big" id="btn-play">▶ Jouer</button>
+              <button class="btn" id="btn-cv-title">Voir le CV classique</button>
+            </div>
+            <p class="press-start">Appuie sur Entrée pour commencer</p>
+            <ul class="controls-legend">
+              <li><kbd>←</kbd><kbd>→</kbd> Bouger</li>
+              <li><kbd>↑</kbd><kbd>Espace</kbd> Sauter</li>
+              <li><kbd>E</kbd> Interagir</li>
+            </ul>
+          </div>
+          <figure class="title-photo px">
+            <img src="assets/img/harena-night.jpg" alt="Harena RAJAONA, de nuit dans un jardin" width="733" height="1100" />
+            <figcaption>
+              <span class="p1">PLAYER 1</span>
+              <dl>
+                <div><dt>Classe</dt><dd>Dév. Senior .NET</dd></div>
+                <div><dt>Base</dt><dd>Antananarivo</dd></div>
+                <div><dt>Guilde</dt><dd>Astek Madagascar</dd></div>
+              </dl>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="end-screen" class="screen end-screen" hidden></section>
+
+      <div id="touch" class="touch" hidden>
+        <div class="touch-group">
+          <button data-act="left" aria-label="Gauche">◀</button>
+          <button data-act="right" aria-label="Droite">▶</button>
+        </div>
+        <div class="touch-group">
+          <button data-act="act" aria-label="Interagir">E</button>
+          <button data-act="jump" aria-label="Sauter" class="touch-jump">▲</button>
+        </div>
+      </div>
+    </div>
+
+    <main id="cv" class="cv" hidden></main>
+
+    <noscript>
+      <div class="noscript">
+        <h1>Harena RAJAONA · Développeur Senior .NET</h1>
+        <p>Ce portfolio est un jeu qui nécessite JavaScript. Retrouvez Harena sur
+          <a href="https://linkedin.com/in/harena-rajaona-4210a4201">LinkedIn</a>,
+          <a href="https://github.com/HarenaRaj">GitHub</a> ou par e-mail :
+          <a href="mailto:harenasoarajaona@gmail.com">harenasoarajaona@gmail.com</a>.</p>
+        <p><a href="CV%20Harena.pdf">Télécharger le CV (PDF)</a></p>
+      </div>
+    </noscript>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
